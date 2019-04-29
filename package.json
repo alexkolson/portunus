@@ -4,7 +4,8 @@
   "description": "Typescript functions for converting from decimal numbers to roman numerals and the other way around.",
   "main": "portunus.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "keywords": [
     "roman-numerals",
