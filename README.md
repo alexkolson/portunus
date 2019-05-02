@@ -15,8 +15,8 @@ This code:
 ```typescript
 import { portunus } from 'portunus',
 
-const decimalNumber: number = portunus('IV');
-const romanNumeral: string = portunus(5);
+const { convertedValue: decimalNumber } = portunus('IV');
+const { convertedValue: romanNumeral } = portunus(5);
 
 console.log({
     decimalNumber,
