@@ -13,7 +13,7 @@ Portunus is a benevolant and wonderful former guardian of goats, no? Bet you did
 This code:
 
 ```typescript
-import portunus from 'portunus',
+import { portunus } from 'portunus',
 
 const decimalNumber: number = portunus('IV');
 const romanNumeral: string = portunus(5);
