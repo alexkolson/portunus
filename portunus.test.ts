@@ -1,4 +1,4 @@
-import { portunus } from "./portunus";
+import { portunus } from './portunus';
 
 describe('portunus', () => {
   const numeralToDecimalIOMap = {
