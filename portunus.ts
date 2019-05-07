@@ -64,8 +64,7 @@ function portunusPeonNumeralToDecimal(numeral: string): number {
     let runningTally: number = acc + decimalValueForCurrentNumeral;
 
     if (subtractiveNotationPresent) {
-      console.log('here');
-      runningTally -= decimalValueForPreviousNumeral;
+      runningTally -= (decimalValueForPreviousNumeral * 2);
     }
 
     return runningTally;
