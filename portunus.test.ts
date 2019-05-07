@@ -6,7 +6,7 @@ describe('portunus', () => {
   });
 
   it('should return 255 when given CCLV', () => {
-    expect(portunus('CCLIV').convertedValue).toBe(255);
+    expect(portunus('CCLV').convertedValue).toBe(255);
   });
 
   it('should return an empty string when given a number', () => {
