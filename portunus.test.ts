@@ -33,7 +33,7 @@ describe('portunus', () => {
 
   for (const [decimal, numeral] of Object.entries(decimalToNumeralIOMap)) {
     it(`should return ${numeral} when given ${decimal}`, () => {
-      expect(portunus(decimal).convertedValue).toBe(numeral);
+      expect(portunus(parseInt(decimal, 10)).convertedValue).toBe(numeral);
     });
   }
 });
