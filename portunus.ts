@@ -1,3 +1,5 @@
+import { stringLiteral } from "@babel/types";
+
 type PortunusInput = string | number;
 type PortunusConvertedValue = string | number;
 
@@ -52,7 +54,21 @@ export function portunus(input: PortunusInput): PortunusOutput {
 }
 
 function portunusPeonNumeralToDecimal(numeral: string): number {
-  return 0;
+  const numeralCollection: string[] = [].slice.call(numeral);
+  return numeralCollection.reduce((acc, currentValue, currentIndex) => {
+    const decimalValueForCurrentNumeral: number = romanNumeralToDecimalValueMap[currentValue];
+    const previousNumeral: string = numeralCollection[currentIndex - 1];
+    const decimalValueForPreviousNumeral: number = romanNumeralToDecimalValueMap[previousNumeral];
+    const subtractiveNotationPresent: boolean = decimalValueForPreviousNumeral && (decimalValueForPreviousNumeral < decimalValueForCurrentNumeral);
+
+    let runningTally: number = acc + decimalValueForCurrentNumeral;
+
+    if (subtractiveNotationPresent) {
+      runningTally -= decimalValueForPreviousNumeral;
+    }
+
+    return runningTally;
+  }, 0);
 }
 
 function portunusPeonDecimalToNumeral(integer: number): string {
