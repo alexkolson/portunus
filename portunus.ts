@@ -17,8 +17,11 @@ const romanNumeralToDecimalValueMap = {
 };
 
 const decimalValueToRomanNumeralMap = Object.keys(romanNumeralToDecimalValueMap)
-  .reduce((prevValue, acc) => {
-    return {};
+  .reduce((acc, currentValue) => {
+    return {
+      [romanNumeralToDecimalValueMap[currentValue]]: currentValue,
+      ...acc,
+    };
   }, {});
 
 function isPortunusInput(input: any): input is PortunusInput {
@@ -36,12 +39,22 @@ export function portunus(input: PortunusInput): PortunusOutput {
   }
 
   if (typeof input === 'string') {
-    return {
-      convertedValue: input.toUpperCase()
-    }
+    return { convertedValue: portunusPeonNumeralToDecimal(input.toUpperCase()) };
+  }
+
+  if (typeof input === 'number') {
+    return { convertedValue: portunusPeonDecimalToNumeral(input) };
   }
 
   return {
-    convertedValue: 5,
+    error: `Something went wrong, perhaps input type check failed? I expect a number or string as input and got: ${typeof input}`,
   };
+}
+
+function portunusPeonNumeralToDecimal(numeral: string): number {
+  return 0;
+}
+
+function portunusPeonDecimalToNumeral(integer: number): string {
+  return '';
 }
