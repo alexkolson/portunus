@@ -1,5 +1,3 @@
-import { stringLiteral } from "@babel/types";
-
 type PortunusInput = string | number;
 type PortunusConvertedValue = string | number;
 
@@ -72,5 +70,7 @@ function portunusPeonNumeralToDecimal(numeral: string): number {
 }
 
 function portunusPeonDecimalToNumeral(integer: number): string {
+  console.log(integer);
+  [5000, 1000, 500, 100, 50, 10, 5, 1].forEach(n => console.log(Math.floor(integer / n)));
   return '';
 }
