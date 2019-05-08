@@ -24,6 +24,9 @@ const decimalValueToRomanNumeralMap: { [decimal: number]: string } = Object.keys
     };
   }, {});
 
+const sortedNumeralCollection: string[] = Object.keys(romanNumeralToDecimalValueMap)
+  .sort((a, b) => romanNumeralToDecimalValueMap[b] - romanNumeralToDecimalValueMap[a]);
+
 const sortedDecimalCollection: number[] = Object.keys(decimalValueToRomanNumeralMap)
   .map(d => parseInt(d, 10))
   .sort((a, b) => b - a);
@@ -74,11 +77,38 @@ function portunusPeonNumeralToDecimal(numeral: string): number {
 }
 
 function portunusPeonDecimalToNumeral(integer: number): string {
-  return sortedDecimalCollection
+  const numeralWithoutSubtractiveNotation: string = sortedDecimalCollection
     .reduce((acc, currentDecimal) => {
       let numeral: string = decimalValueToRomanNumeralMap[currentDecimal];
       let occurencesOfNumeral: number = Math.floor(integer / currentDecimal);
       integer -= (currentDecimal * occurencesOfNumeral);
       return `${acc}${numeral.repeat(occurencesOfNumeral)}`;
     }, '');
+
+  const numeralWithoutSubtractiveNotationCollection: string[] = [].slice.call(numeralWithoutSubtractiveNotation);
+
+  let numeralWithSubtractiveNotationCollection: string[] = [];
+
+  for (let i: number = 0; i < numeralWithoutSubtractiveNotationCollection.length; ++i) {
+    const n: string = numeralWithoutSubtractiveNotationCollection[i];
+    const numeralRankIndex: number = sortedNumeralCollection.indexOf(n);
+
+    const nextLowestRankingNumeralIndex: number = numeralRankIndex + 1;
+    const nextLowestRankingNumeral: string = sortedNumeralCollection[nextLowestRankingNumeralIndex];
+
+    const nextHighestRankingNumeralIndex: number = numeralRankIndex - 1;
+    const nextHighestRankingNumeral: string = sortedNumeralCollection[nextHighestRankingNumeralIndex];
+
+    const nextFourNumerals: string[] = [1, 2, 3, 4].map(indexOffset => numeralWithoutSubtractiveNotationCollection[i + indexOffset]);
+
+    if (!!nextHighestRankingNumeral && nextFourNumerals.every(n => sortedNumeralCollection.indexOf(n) === nextLowestRankingNumeralIndex)) {
+      numeralWithSubtractiveNotationCollection.push(`${nextLowestRankingNumeral}${nextHighestRankingNumeral}`);
+      i += 4;
+      continue;
+    }
+
+    numeralWithSubtractiveNotationCollection.push(n);
+  };
+
+  return numeralWithSubtractiveNotationCollection.join('');
 }

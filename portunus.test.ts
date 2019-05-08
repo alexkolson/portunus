@@ -37,7 +37,7 @@ describe('portunus', () => {
     });
   }
 
-  it('should return CCLXXXXIII when given 293', () => {
-    expect(portunus(293).convertedValue).toBe('CCLXXXXIII');
+  it('should return CCXCIII when given 293', () => {
+    expect(portunus(293).convertedValue).toBe('CCXCIII');
   });
 });
