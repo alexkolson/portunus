@@ -116,22 +116,22 @@ function portunusPeonDecimalToNumeral(integer: number): string {
 
     if (!!nextHighestRankingNumeral) {
       if (nextThreeNumerals.every(n => sortedNumeralCollection.indexOf(n) === numeralRankIndex)) {
-        console.log({
+        /*console.log({
           msg: 'here in next three',
           nextThreeNumerals,
           numeralWithoutSubtractiveNotation,
-        });
+        });*/
         numeralWithSubtractiveNotationCollection.push(`${numeral}${nextHighestRankingNumeral}`)
         i += 3;
         continue;
       }
 
       if (nextFourNumerals.every(n => sortedNumeralCollection.indexOf(n) === nextLowestRankingNumeralIndex)) {
-        console.log({
+        /*console.log({
           msg: 'here in next four',
           nextFourNumerals,
           numeralWithoutSubtractiveNotation,
-        });
+        });*/
         numeralWithSubtractiveNotationCollection.push(`${nextLowestRankingNumeral}${nextHighestRankingNumeral}`);
         i += 4;
         continue;
