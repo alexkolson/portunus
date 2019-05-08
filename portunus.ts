@@ -24,6 +24,10 @@ const decimalValueToRomanNumeralMap: { [decimal: number]: string } = Object.keys
     };
   }, {});
 
+const sortedDecimalCollection: number[] = Object.keys(decimalValueToRomanNumeralMap)
+  .map(d => parseInt(d, 10))
+  .sort((a, b) => b - a);
+
 function isPortunusInput(input: any): input is PortunusInput {
   return typeof input === 'string' || typeof input === 'number';
 }
@@ -70,8 +74,11 @@ function portunusPeonNumeralToDecimal(numeral: string): number {
 }
 
 function portunusPeonDecimalToNumeral(integer: number): string {
-  console.log(integer);
-  console.log(decimalValueToRomanNumeralMap);
-  [5000, 1000, 500, 100, 50, 10, 5, 1].forEach(n => console.log(Math.floor(integer / n)));
-  return '';
+  return sortedDecimalCollection
+    .reduce((acc, currentDecimal) => {
+      let numeral: string = decimalValueToRomanNumeralMap[currentDecimal];
+      let occurencesOfNumeral: number = Math.floor(integer / currentDecimal);
+      integer -= (currentDecimal * occurencesOfNumeral);
+      return `${acc}${numeral.repeat(occurencesOfNumeral)}`;
+    }, '');
 }

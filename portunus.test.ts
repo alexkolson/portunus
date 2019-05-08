@@ -36,4 +36,8 @@ describe('portunus', () => {
       expect(portunus(parseInt(decimal, 10)).convertedValue).toBe(numeral);
     });
   }
+
+  it('should return CCLXXXXIII when given 293', () => {
+    expect(portunus(293).convertedValue).toBe('CCLXXXXIII');
+  });
 });
