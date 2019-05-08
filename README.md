@@ -1,5 +1,7 @@
 # Portunus
 
+Converts between roman numerals and decimal numbers.
+
 [Portunus](https://en.wikipedia.org/wiki/Portunus_(mythology)) was the ancient Roman god of keys, doors, livestock, and ports. He is now a typescript roman numeral translator. My how the mighty have fallen...but then I guess we all need a day job right?
 
 ## Usage
