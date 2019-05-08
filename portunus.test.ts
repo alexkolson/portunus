@@ -1,7 +1,7 @@
 import { portunus } from './portunus';
 
 describe('portunus', () => {
-  const numeralToDecimalIOMap = {
+  const numeralToDecimalIOMap: { [numeral: string]: number } = {
     'CCLIV': 254,
     'CCLV': 255,
     'MMCDXXI': 2421,
@@ -17,7 +17,7 @@ describe('portunus', () => {
     'MMXIX': 2019,
   };
 
-  const decimalToNumeralIOMap = Object.keys(numeralToDecimalIOMap)
+  const decimalToNumeralIOMap: { [decimal: number]: string } = Object.keys(numeralToDecimalIOMap)
     .reduce((acc, currentValue) => {
       return {
         [numeralToDecimalIOMap[currentValue]]: currentValue,

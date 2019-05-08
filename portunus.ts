@@ -6,7 +6,7 @@ interface PortunusOutput {
   convertedValue?: PortunusConvertedValue;
 }
 
-const romanNumeralToDecimalValueMap = {
+const romanNumeralToDecimalValueMap: { [numeral: string]: number } = {
   'I': 1,
   'V': 5,
   'X': 10,
@@ -16,7 +16,7 @@ const romanNumeralToDecimalValueMap = {
   'M': 1000,
 };
 
-const decimalValueToRomanNumeralMap = Object.keys(romanNumeralToDecimalValueMap)
+const decimalValueToRomanNumeralMap: { [decimal: number]: string } = Object.keys(romanNumeralToDecimalValueMap)
   .reduce((acc, currentValue) => {
     return {
       [romanNumeralToDecimalValueMap[currentValue]]: currentValue,
@@ -57,7 +57,7 @@ function portunusPeonNumeralToDecimal(numeral: string): number {
     const decimalValueForCurrentNumeral: number = romanNumeralToDecimalValueMap[currentValue];
     const previousNumeral: string = numeralCollection[currentIndex - 1];
     const decimalValueForPreviousNumeral: number = romanNumeralToDecimalValueMap[previousNumeral];
-    const subtractiveNotationPresent: boolean = decimalValueForPreviousNumeral && (decimalValueForPreviousNumeral < decimalValueForCurrentNumeral);
+    const subtractiveNotationPresent: boolean = !!decimalValueForPreviousNumeral && (decimalValueForPreviousNumeral < decimalValueForCurrentNumeral);
 
     let runningTally: number = acc + decimalValueForCurrentNumeral;
 
@@ -71,6 +71,7 @@ function portunusPeonNumeralToDecimal(numeral: string): number {
 
 function portunusPeonDecimalToNumeral(integer: number): string {
   console.log(integer);
+  console.log(decimalValueToRomanNumeralMap);
   [5000, 1000, 500, 100, 50, 10, 5, 1].forEach(n => console.log(Math.floor(integer / n)));
   return '';
 }
