@@ -90,8 +90,8 @@ function portunusPeonDecimalToNumeral(integer: number): string {
   let numeralWithSubtractiveNotationCollection: string[] = [];
 
   for (let i: number = 0; i < numeralWithoutSubtractiveNotationCollection.length; ++i) {
-    const n: string = numeralWithoutSubtractiveNotationCollection[i];
-    const numeralRankIndex: number = sortedNumeralCollection.indexOf(n);
+    const numeral: string = numeralWithoutSubtractiveNotationCollection[i];
+    const numeralRankIndex: number = sortedNumeralCollection.indexOf(numeral);
 
     const nextLowestRankingNumeralIndex: number = numeralRankIndex + 1;
     const nextLowestRankingNumeral: string = sortedNumeralCollection[nextLowestRankingNumeralIndex];
@@ -100,14 +100,45 @@ function portunusPeonDecimalToNumeral(integer: number): string {
     const nextHighestRankingNumeral: string = sortedNumeralCollection[nextHighestRankingNumeralIndex];
 
     const nextFourNumerals: string[] = [1, 2, 3, 4].map(indexOffset => numeralWithoutSubtractiveNotationCollection[i + indexOffset]);
+    const nextThreeNumerals: string[] = nextFourNumerals.slice(0, 3);
 
-    if (!!nextHighestRankingNumeral && nextFourNumerals.every(n => sortedNumeralCollection.indexOf(n) === nextLowestRankingNumeralIndex)) {
-      numeralWithSubtractiveNotationCollection.push(`${nextLowestRankingNumeral}${nextHighestRankingNumeral}`);
-      i += 4;
-      continue;
+    /*console.log({
+      numeralWithSubtractiveNotationCollection,
+      numeral,
+      numeralRankIndex,
+      nextLowestRankingNumeral,
+      nextLowestRankingNumeralIndex,
+      nextHighestRankingNumeral,
+      nextHighestRankingNumeralIndex,
+      nextFourNumerals,
+      nextThreeNumerals,
+    });*/
+
+    if (!!nextHighestRankingNumeral) {
+      if (nextThreeNumerals.every(n => sortedNumeralCollection.indexOf(n) === numeralRankIndex)) {
+        console.log({
+          msg: 'here in next three',
+          nextThreeNumerals,
+          numeralWithoutSubtractiveNotation,
+        });
+        numeralWithSubtractiveNotationCollection.push(`${numeral}${nextHighestRankingNumeral}`)
+        i += 3;
+        continue;
+      }
+
+      if (nextFourNumerals.every(n => sortedNumeralCollection.indexOf(n) === nextLowestRankingNumeralIndex)) {
+        console.log({
+          msg: 'here in next four',
+          nextFourNumerals,
+          numeralWithoutSubtractiveNotation,
+        });
+        numeralWithSubtractiveNotationCollection.push(`${nextLowestRankingNumeral}${nextHighestRankingNumeral}`);
+        i += 4;
+        continue;
+      }
     }
 
-    numeralWithSubtractiveNotationCollection.push(n);
+    numeralWithSubtractiveNotationCollection.push(numeral);
   };
 
   return numeralWithSubtractiveNotationCollection.join('');
