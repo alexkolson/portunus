@@ -3,8 +3,5 @@
   "compilerOptions": {
     "outDir": "dist",
     "target": "es2017"
-  },
-  "exclude": [
-    "**/*.test.ts"
-  ]
+  }
 }
