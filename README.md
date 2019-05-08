@@ -34,3 +34,7 @@ Logs the following:
     romanNumberal: 'V'
 }
 ```
+
+## A Word On The Implementation
+
+Since portunus was mostly just a fun little brain teaser for me, I wanted to implement it in a way such that I only stored the base roman numerals in a lookup object, as opposed to storing the base roman numerals and their subtractive notation counterparts. Storing the subtractive notation counterparts greatly reduces code complexity.
